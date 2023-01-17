@@ -1,2 +1,6 @@
-for i in range(1, 10):
-    print("KZL")
+s = "Tesst"
+b = "kerrv"
+
+s = s.replace(s[2], b[2], 1)
+
+print(s)
