@@ -7,12 +7,15 @@ milk_price = flour_price + flour_price * 0.25
 loaf_price = 0.25 * milk_price + flour_price + eggs_price
 loafs = math.floor(budget/(0.25 * milk_price + flour_price + eggs_price))
 rest = budget - (loafs * loaf_price)
-refer = loafs // 3
-colored_eggs = refer * loafs - (refer - 2)
+eggs = 0
 
-print(colored_eggs)
-
-for i in range(loafs):
+for i in range(1, loafs + 1):
+    eggs += 3
     if i % 3 == 0:
+        eggs = eggs - (i - 2)
+print(f"You made {loafs} loaves of Easter bread! Now you have {eggs} eggs and {rest :.2f}BGN left.")
+
+
+
 
 
