@@ -1,5 +1,5 @@
-first_string = str(input())
-second_string = str(input())
+first_string = "samocska"
+second_string ="kzlewcki"
 result = ""
 for i in range(len(first_string)):
     if first_string[i] != second_string[i]:
