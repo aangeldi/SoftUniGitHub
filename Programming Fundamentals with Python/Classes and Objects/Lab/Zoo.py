@@ -4,38 +4,43 @@ class Zoo:
     def __init__(self, name):
         self.name = name
         self.mammals = []
-        self.fish = []
+        self.fishes = []
         self.birds = []
 
     def add_animal(self, specie, name):
-        if specie == "mammals":
+        if specie == "mammal":
             self.mammals.append(name)
-        elif species == "fish":
-            self.fish.append(name)
-        elif species == "birds":
+        elif specie == "fish":
+            self.fishes.append(name)
+        elif specie == "bird":
             self.birds.append(name)
 
         Zoo.__animals += 1
 
     def get_info(self, specie):
-        if specie == "mammals":
-            return f"Mammals in {self.name}: {self.mammals}\
-                    Total animals: {Zoo.__animals}"
+        result = ""
+        if specie == "mammal":
+            result += f"Mammals in {self.name}: {', '.join(self.mammals)}\n"
 
-        elif species == "fish":
-            return f"Fish in {self.name}: {self.fish}\
-                                Total animals: {Zoo.__animals}"
-        elif species == "birds":
-            return f"Birds in {self.name}: {self.birds}\
-                                Total animals: {Zoo.__animals}"
+        elif specie == "fish":
+            result += f"Fishes in {self.name}: {', '.join(self.fishes)}\n"
+
+        elif specie == "bird":
+            result += f"Birds in {self.name}: {', '.join(self.birds)}\n"
+
+        result += f"Total animals: {Zoo.__animals}"
+        return result
 
 
 set_zoo_name = input()
+zoo = Zoo(set_zoo_name)
 count = int(input())
 
-zoo = Zoo(set_zoo_name)
-species = "mammal"
-animal = "lion"
-zoo.add_animal(species, animal)
+for i in range(count):
+    command = input().split()
+    species = command[0]
+    animal = command[1]
+    zoo.add_animal(species, animal)
 
-print(f"{zoo.get_info(species)}")
+index = input()
+print(zoo.get_info(index))
