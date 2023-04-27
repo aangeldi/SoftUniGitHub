@@ -1,12 +1,23 @@
-password = "ppp_"
+import random
+quatar_finals = []
+teams = ["CSKA", "levski", "botev", "slavia", "ludogorets", "loko", "beroe", "cherno more"]
+length = int(len(teams) / 2)
+for i in range(length):
+    random_element1 = random.choice(teams)
+    quatar_finals.append(random_element1)
+    teams.remove(random_element1)
 
-if len(password) < 8:
-    print("Password must be at least 8 characters long!")
-if not all(ch.isalnum() or ch == "_" for ch in password):
-    print("Password must consist only of letters, digits and underscore!")
-if not any(ch.isupper() for ch in password):
-    print("Password must consist at least one uppercase letter!")
-if not any(ch.islower() for ch in password):
-    print("Password must consist at least one lowercase letter!")
-if not any(ch.isdigit() for ch in password):
-    print("Password must consist at least one digit!")
+    random_element2 = random.choice(teams)
+    quatar_finals.append(random_element2)
+    teams.remove(random_element2)
+
+
+a = random.randint(1, 4)
+b = random.randint(1, 4)
+while b == a:
+    b = random.randint(1, 4)
+
+
+print(quatar_finals)
+print(a)
+print(b)
