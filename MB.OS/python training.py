@@ -39,7 +39,6 @@ canoe_inst.check_sw_hw_verssions()
 
 
 current_GMT = time.gmtime()
-
 time_stamp = calendar.timegm(current_GMT)
 canoe_inst.print_in_py_canoe(f"Current timestamp: {time_stamp}")
 
@@ -60,62 +59,28 @@ canoe_inst.print_in_py_canoe(f"Current timestamp: {time_stamp}")
 # print(resp)
 
 
-destination_mac = "0180C200000E" 
-source_mac = "3CCE15000005" 
-TPI = "8100" 
-TCI = "E07F" #(User priority(3bits), Canonical format indicator(1 bit), VLAN ID(12 bits))
-ether_type = "88F7"
-
-#Sync message header: 
-message_type = "10"
-version_ptp = "02" 
-message_length  = "002C" #44 
-domain_number = "00"
-reserved_1byte = "00"
-flags = "0208"
-correctionField = "0000000000000000"
-reserved_4bytes = "00000000"
-sourcePortIdentity = "3CCE15FFFE0000050001"
-sequence_id = 0
-logMessageInterval = "00FF" #255(0.5s)
-reserved_10bytes = "00000000000000000000"
 
 
-for seq_id in range(16, 22, 1):
-    sequence_id = str(hex(seq_id))
-    print(sequence_id)
+###########################################################################
+#TestCase: Check Sequence counter
+canoe_inst.check_sync_fup_SC(canoe_inst.send_sync_fup(1, 3, "ETH"))
+###########################################################################
+
+
+###########################################################################
+#TestCase: Check CRCS
+
     
+crc = canoe_inst.calculate_crc8x_fast("ETH", "CRC_Time_0", canoe_inst.send_sync_fup(1, 3, "ETH"))
+print(f"Full Crc = 0x{crc:x}, dec = {crc}")
 
-
-gts_sync_message = ""
-gts_message_hex = []
-
-#0180C200000E  3CCE15000005 8100 E07F 88F7 10 02 00 2C 00 00 02 08 00 00 00 00 00 00 00 00 00 00 00 00 3C CE 15 FF FE 00 00 05 00 01 00 02 00 FF 00 00 00 00 00 00 00 00 00 00
-#0180C200000E  3CCE15000005 8100 E07F 88F7 10 02 00 2C 00 00 02 08 00 00 00 00 00 00 00 00 00 00 00 00 3C CE 15 FF FE 00 00 05 00 01 00 03 00 FF 00 00 00 00 00 00 00 00 00 00
-
-gts_sync_message = destination_mac + source_mac + TPI + TCI + ether_type + message_type + version_ptp + message_length + domain_number + reserved_1byte + flags + correctionField + reserved_4bytes + sourcePortIdentity + sequence_id + logMessageInterval + reserved_10bytes
-canoe_inst.print_in_py_canoe(f"Message: 0x{gts_sync_message}")
-
-hex_sign = "0x"
-for i in range(0,len(gts_sync_message), 2):
-    byte_value = (hex_sign + gts_sync_message[i] + gts_sync_message[i + 1])
-    gts_message_hex.append(byte_value)
- 
-canoe_inst.print_in_py_canoe(f"Message:{gts_message_hex}")
-
-
-#convert string to hex
-an_integer = int(gts_message_hex[1], 16)
-hex_value = hex(an_integer)
-#convert hex to bin
-bin_value = bin(int(hex_value, 16))[2:]
-print(bin_value[0])
+###########################################################################
  
  
-canoe_inst.test_case("Check values")
-canoe_inst.test_step("Check hex_value")
-canoe_inst.requirement("12345")
-canoe_inst.check_value("hex_value", hex_value,"0x80")
+#canoe_inst.test_case("Check values")
+#canoe_inst.test_step("Check hex_value")
+#canoe_inst.requirement("12345")
+#canoe_inst.check_value("hex_value", hex_value,"0x80")
 
 
 # # Stop CANoe Measurement
