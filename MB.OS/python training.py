@@ -69,8 +69,6 @@ canoe_inst.check_sync_fup_SC(canoe_inst.send_sync_fup(1, 3, "ETH"))
 
 ###########################################################################
 #TestCase: Check CRCS
-
-    
 crc = canoe_inst.calculate_crc8x_fast("ETH", "CRC_Time_0", canoe_inst.send_sync_fup(1, 3, "ETH"))
 print(f"Full Crc = 0x{crc:x}, dec = {crc}")
 
