@@ -38,9 +38,9 @@ canoe_inst.check_sw_hw_verssions()
 
 
 
-current_GMT = time.gmtime()
-time_stamp = calendar.timegm(current_GMT)
-canoe_inst.print_in_py_canoe(f"Current timestamp: {time_stamp}")
+#current_GMT = time.gmtime()
+#time_stamp = calendar.timegm(current_GMT)
+#canoe_inst.print_in_py_canoe(f"Current timestamp: {time_stamp}")
 
 
 # # Start CANoe measurement
@@ -63,15 +63,13 @@ canoe_inst.print_in_py_canoe(f"Current timestamp: {time_stamp}")
 
 ###########################################################################
 #TestCase: Check Sequence counter
-canoe_inst.check_sync_fup_SC(canoe_inst.send_sync_fup(1, 3, "ETH"))
+canoe_inst.check_sync_fup_SC(canoe_inst.send_sync_fup_eth(1, 256, "ETH"))
 ###########################################################################
 
 
 ###########################################################################
-#TestCase: Check CRCS
-crc = canoe_inst.calculate_crc8x_fast("ETH", "CRC_Time_0", canoe_inst.send_sync_fup(1, 3, "ETH"))
-print(f"Full Crc = 0x{crc:x}, dec = {crc}")
-
+#TestCase: Check CRCs
+canoe_inst.calculate_crc8x_fast("ETH", "CRC_Time_0", canoe_inst.send_sync_fup_eth(1, 256, "ETH"))
 ###########################################################################
  
  
