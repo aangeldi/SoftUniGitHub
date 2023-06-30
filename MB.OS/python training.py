@@ -8,16 +8,14 @@ import time
 # create CANoe object
 canoe_inst = CANoe()
 
-
-canoe_inst.test_author("Dimitar Angelov", "dimitar.angelov@mercedes-benz.com")
-
       
 # open CANoe configuration. Replace canoe_cfg with yours.
 canoe_inst.open(canoe_cfg=r'C:\MBOS\Mastercheck_V182_intern\ConverterConfig.cfg')
 
 canoe_inst.enable_write_window_output_file(r"C:\.py_canoe\write_out.txt")
-wait(1)
-canoe_inst.write_text_in_write_window(f"SAMO CSKA")
+canoe_inst.write_text_in_write_window("Test Author:Dimitar Angelov Email:dimitar.angelov@mercedes-benz.com")
+#wait(1)
+#canoe_inst.write_text_in_write_window(f"SAMO CSKA")
 
 # print installed CANoe application version
 canoe_inst.get_canoe_version_info()
@@ -59,18 +57,35 @@ canoe_inst.check_sw_hw_verssions()
 # print(resp)
 
 
-
+loops = 2
+seq_id_loop = 16
+res = canoe_inst.send_sync_fup_eth(loops, seq_id_loop, "ETH")
 
 ###########################################################################
 #TestCase: Check Sequence counter
-canoe_inst.check_sync_fup_SC(canoe_inst.send_sync_fup_eth(1, 256, "ETH"))
+canoe_inst.check_sync_fup_SC(res)
 ###########################################################################
 
+###########################################################################
+#TestCase: check_vlan_priority
+canoe_inst.check_vlan_priority(res)
+###########################################################################
 
-###########################################################################
-#TestCase: Check CRCs
-canoe_inst.calculate_crc8x_fast("ETH", "CRC_Time_0", canoe_inst.send_sync_fup_eth(1, 256, "ETH"))
-###########################################################################
+############################################################################
+##TestCase: Correct frame format of SYNC
+#canoe_inst.check_frame_format_of_sync(res)
+############################################################################
+
+############################################################################
+##TestCase: Correct frame format of FUP
+#canoe_inst.check_frame_format_of_fup(res)
+############################################################################
+
+############################################################################
+##TestCase: Check CRCs
+#canoe_inst.calculate_crc8x_fast("ETH", "CRC_Time_0", canoe_inst.send_sync_fup_eth(loops, seq_id_loop, "ETH"))
+##canoe_inst.calculate_crc8x_fast("ETH", "CRC_Time_1", canoe_inst.send_sync_fup_eth(1, 256, "ETH"))
+############################################################################
  
  
 #canoe_inst.test_case("Check values")
