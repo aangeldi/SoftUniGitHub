@@ -1424,6 +1424,7 @@ class CANoe:
                 self.step_nok()
 
     def check_frame_format_of_fup(self, result):
+        self.write_text_in_write_window(f"\ops")
         self.test_case("Correct frame format of FUP")
         self.requirement("CTP-10845")
         sec = 10
@@ -1442,7 +1443,7 @@ class CANoe:
             correction_field = self.result["fup"][idx][52:68]
             reserved_3 = self.result["fup"][idx][68:76]
             source_port_identity = self.result["fup"][idx][76:96]
-            sequenceId  = int(self.result["fup"][idx][96:100])
+            sequenceId  = int(self.result["fup"][idx][96:100], 16)
             control = self.result["fup"][idx][100:102]
             log_mes_interval = self.result["fup"][idx][102:104]
             recived_prec_ori_time = self.result["fup"][idx][104:124]

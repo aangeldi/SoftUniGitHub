@@ -63,7 +63,7 @@ canoe_inst.check_sw_hw_verssions()
 
 
 loops = 1
-seq_id_loop = 0xffff
+seq_id_loop = 0xf
 res = canoe_inst.send_sync_fup_eth(loops, seq_id_loop, "ETH")
 
 ############################################################################
