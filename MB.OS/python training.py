@@ -9,7 +9,6 @@ from datetime import datetime
 # create CANoe object
 canoe_inst = CANoe()
 
-      
 # open CANoe configuration. Replace canoe_cfg with yours.
 canoe_inst.open(canoe_cfg=r'C:\MBOS\Mastercheck_V182_intern\ConverterConfig.cfg')
 
@@ -31,24 +30,18 @@ canoe_inst.get_username()
 # pcheck_sw_hw_verssions
 canoe_inst.check_sw_hw_verssions()
 
-
-
 # # check SW verssion
 # canoe_inst.sw_verssion(sw)
 
 # # check HW verssion
 # canoe_inst.hw_verssion(hw)
 
-
-
 #current_GMT = time.gmtime()
 #time_stamp = calendar.timegm(current_GMT)
 #canoe_inst.print_in_py_canoe(f"Current timestamp: {time_stamp}")
 
-
 # # Start CANoe measurement
 # canoe_inst.start_measurement()
-
 
 # # get signal value. Replace arguments with your message and signal data.
 # sig_val = canoe_inst.get_signal_value('CAN', 1, 'LightState', 'FlashLight')
@@ -60,7 +53,6 @@ canoe_inst.check_sw_hw_verssions()
 # # send diagnostic request. Replace arguments with your diagnostics data.
 # resp = canoe_inst.send_diag_request('Door', '10 01')
 # print(resp)
-
 
 loops = 1
 seq_id_loop = 0xf
@@ -91,8 +83,7 @@ canoe_inst.check_frame_format_of_fup(res)
 #canoe_inst.calculate_crc8x_fast("ETH", "CRC_Time_0", canoe_inst.send_sync_fup_eth(loops, seq_id_loop, "ETH"))
 ##canoe_inst.calculate_crc8x_fast("ETH", "CRC_Time_1", canoe_inst.send_sync_fup_eth(1, 256, "ETH"))
 ############################################################################
- 
- 
+  
 #canoe_inst.test_case("Check values")
 #canoe_inst.test_step("Check hex_value")
 #canoe_inst.requirement("12345")
