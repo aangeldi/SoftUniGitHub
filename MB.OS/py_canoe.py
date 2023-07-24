@@ -1424,9 +1424,9 @@ class CANoe:
                 self.step_nok()
 
     def check_frame_format_of_fup(self, result):
-        self.write_text_in_write_window(f"\ops")
         self.test_case("Correct frame format of FUP")
         self.requirement("CTP-10845")
+        
         sec = 10
         self.result = result
         for idx in range(len(self.result['fup'])):
@@ -1447,6 +1447,31 @@ class CANoe:
             control = self.result["fup"][idx][100:102]
             log_mes_interval = self.result["fup"][idx][102:104]
             recived_prec_ori_time = self.result["fup"][idx][104:124]
+            tlvType_1 = self.result["fup"][idx][124:128]
+            lengthField_1 = self.result["fup"][idx][128:132]
+            organizationId_1 = self.result["fup"][idx][132:138]
+            organizationSubType_1 = self.result["fup"][idx][138:144]
+            cumulativeScaledRateOffset = self.result["fup"][idx][144:152]
+            gmTimeBaseIndicator = self.result["fup"][idx][152:156]
+            lastGmPhaseChange = self.result["fup"][idx][156:180]
+            caledLastGmFreqChange = self.result["fup"][idx][180:188]
+            tlvType_2 = self.result["fup"][idx][188:192]
+            lengthField_2 = self.result["fup"][idx][192:196]
+            organizationId_2 = self.result["fup"][idx][196:202]
+            organizationSubType_2 = self.result["fup"][idx][202:208]
+            Type_1 = self.result["fup"][idx][208:210]
+            Length_1 = self.result["fup"][idx][210:212]
+            CRC_Time_Flags = self.result["fup"][idx][212:214]
+            Type_2 = self.result["fup"][idx][218:220]
+            Length_2 = self.result["fup"][idx][220:222]
+            Status = self.result["fup"][idx][222:224]
+            Type_3 = self.result["fup"][idx][226:228]
+            Length_3 = self.result["fup"][idx][228:230]
+            UserDataLength = self.result["fup"][idx][230:232]
+            UserByte_0 = self.result["fup"][idx][232:234]
+            UserByte_1 = self.result["fup"][idx][234:236]
+            UserByte_2 = self.result["fup"][idx][236:238]
+
             if sequenceId % 2 == 0:
                 prec_ori_time_s = ""
                 prec_ori_time_ns = ""
@@ -1467,10 +1492,6 @@ class CANoe:
             if len(prec_ori_time) < 20:
                 temp = 20 - len(prec_ori_time)
                 prec_ori_time = temp * "0" + prec_ori_time
-            
-            print("\n")
-            print(prec_ori_time)
-
                        
             if message_type == "18":
                 self.write_text_in_write_window(f"message_type: {message_type}")
@@ -1556,6 +1577,174 @@ class CANoe:
                 self.write_text_in_write_window(f"Expected:prec_ori_time = {recived_prec_ori_time}; Real: prec_ori_time = {prec_ori_time}")
                 self.step_nok()
 
+            if tlvType_1 == "0003":
+                self.write_text_in_write_window(f"tlvType_1: {tlvType_1}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:tlvType_1 = 0x0003; Real: tlvType_1 = {tlvType_1}")
+                self.step_nok()
+
+            if lengthField_1 == "001C":
+                self.write_text_in_write_window(f"lengthField_1: {lengthField_1}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:lengthField_1 = 0x001C; Real: lengthField_1 = {lengthField_1}")
+                self.step_nok()
+
+            if organizationId_1 == "0080C2":
+                self.write_text_in_write_window(f"organizationId_1: {organizationId_1}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:organizationId_1 = 0x0080C2; Real: organizationId_1 = {organizationId_1}")
+                self.step_nok()
+
+            if organizationSubType_1 == "000001":
+                self.write_text_in_write_window(f"organizationSubType_1: {organizationSubType_1}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:organizationSubType_1 = 0x000001; Real: organizationSubType_1 = {organizationSubType_1}")
+                self.step_nok()
+
+            if cumulativeScaledRateOffset == "00000001":
+                self.write_text_in_write_window(f"cumulativeScaledRateOffset: {cumulativeScaledRateOffset}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:cumulativeScaledRateOffset = 0x00000001; Real: cumulativeScaledRateOffset = {cumulativeScaledRateOffset}")
+                self.step_nok()
+
+            if gmTimeBaseIndicator == "0000":
+                self.write_text_in_write_window(f"gmTimeBaseIndicator: {gmTimeBaseIndicator}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:gmTimeBaseIndicator = 0x0000; Real: gmTimeBaseIndicator = {gmTimeBaseIndicator}")
+                self.step_nok()
+
+            if lastGmPhaseChange == "000000000000000000000000":
+                self.write_text_in_write_window(f"lastGmPhaseChange: {lastGmPhaseChange}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:lastGmPhaseChange = 0x000000000000000000000000; Real: lastGmPhaseChange = {lastGmPhaseChange}")
+                self.step_nok()
+
+            if caledLastGmFreqChange == "00000000":
+                self.write_text_in_write_window(f"caledLastGmFreqChange: {caledLastGmFreqChange}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:caledLastGmFreqChange = 0x000000000000000000000000; Real: caledLastGmFreqChange = {caledLastGmFreqChange}")
+                self.step_nok()
+
+            if tlvType_2 == "0003":
+                self.write_text_in_write_window(f"tlvType_2: {tlvType_2}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:tlvType_2 = 0x0003; Real: tlvType_2 = {tlvType_2}")
+                self.step_nok()
+
+            if lengthField_2 == "0016":
+                self.write_text_in_write_window(f"lengthField_2: {lengthField_2}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:lengthField_2 = 0x0016; Real: lengthField_2 = {lengthField_2}")
+                self.step_nok()
+
+            if organizationId_2 == "1A75FB":
+                self.write_text_in_write_window(f"organizationId_2: {organizationId_2}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:organizationId_2 = 0x1A75FB; Real: organizationId_2 = {organizationId_2}")
+                self.step_nok()
+
+            if organizationSubType_2 == "605676":
+                self.write_text_in_write_window(f"organizationSubType_2: {organizationSubType_2}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:organizationSubType_2 = 0x605676; Real: organizationSubType_2 = {organizationSubType_2}")
+                self.step_nok()
+
+            if Type_1 == "28":
+                self.write_text_in_write_window(f"Type_1: {Type_1}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:Type_1 = 0x28; Real: Type_1 = {Type_1}")
+                self.step_nok()
+
+            if Length_1 == "03":
+                self.write_text_in_write_window(f"Length_1: {Length_1}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:Length_1 = 0x03; Real: Length_1 = {Length_1}")
+                self.step_nok()
+
+            if CRC_Time_Flags == "37":
+                self.write_text_in_write_window(f"CRC_Time_Flags: {CRC_Time_Flags}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:CRC_Time_Flags = 0x37; Real: CRC_Time_Flags = {CRC_Time_Flags}")
+                self.step_nok()
+
+            if Type_2 == "50":
+                self.write_text_in_write_window(f"Type_2: {Type_2}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:Type_2 = 0x50; Real: Type_2 = {Type_2}")
+                self.step_nok()
+
+            if Length_2 == "02":
+                self.write_text_in_write_window(f"Length_2: {Length_2}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:Length_2 = 0x02; Real: Length_2 = {Length_2}")
+                self.step_nok()
+
+            if Status == "00":
+                self.write_text_in_write_window(f"Status: {Status}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:Status = 0x00; Real: Status = {Status}")
+                self.step_nok()
+
+            if Type_3 == "60":
+                self.write_text_in_write_window(f"Type_2: {Type_3}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:Type_3 = 0x60; Real: Type_3 = {Type_3}")
+                self.step_nok()
+
+            if Length_3 == "05":
+                self.write_text_in_write_window(f"Length_3: {Length_3}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:Length_3 = 0x05; Real: Length_3 = {Length_3}")
+                self.step_nok()
+
+            if UserDataLength == "01":
+                self.write_text_in_write_window(f"UserDataLength: {UserDataLength}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:UserDataLength = 0x01; Real: UserDataLength = {UserDataLength}")
+                self.step_nok()
+
+            if UserByte_0 == "20":
+                self.write_text_in_write_window(f"UserByte_0: {UserByte_0}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:UserByte_0 = 0x20; Real: UserByte_0 = {UserByte_0}")
+                self.step_nok()
+
+            if UserByte_1 == "00":
+                self.write_text_in_write_window(f"UserByte_1: {UserByte_1}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:UserByte_1 = 0x00; Real: UserByte_1 = {UserByte_1}")
+                self.step_nok()
+
+            if UserByte_2 == "00":
+                self.write_text_in_write_window(f"UserByte_2: {UserByte_2}")
+                self.step_ok()
+            else:
+                self.write_text_in_write_window(f"Expected:UserByte_2 = 0x00; Real: UserByte_2 = {UserByte_2}")
+                self.step_nok()
+
     def calculate_crc8x_fast(self, network, crc, result):
         self.test_case("Check CRCs status")
 
@@ -1565,7 +1754,8 @@ class CANoe:
         
         if self.network == "ETH":
             self.test_step("Check Eth CRC_Time_0")
-            self.requirement("12349")
+            self.requirement("CTP-10847")
+            self.requirement("CTP-12477")
             for idx in range(len(self.result['sync'])):
                 self.write_text_in_write_window(f"gts_sync_message {self.result['sync'][idx]}")
                 self.write_text_in_write_window(f"gts_fup_message {self.result['fup'][idx]}")

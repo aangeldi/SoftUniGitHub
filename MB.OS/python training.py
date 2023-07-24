@@ -55,12 +55,12 @@ canoe_inst.check_sw_hw_verssions()
 # print(resp)
 
 loops = 1
-seq_id_loop = 0xf
+seq_id_loop = 0xffff
 res = canoe_inst.send_sync_fup_eth(loops, seq_id_loop, "ETH")
 
 ############################################################################
 ##TestCase: Check Sequence counter
-#canoe_inst.check_sync_fup_SC(res)
+canoe_inst.check_sync_fup_SC(res)
 ############################################################################
 
 ############################################################################
@@ -75,7 +75,7 @@ res = canoe_inst.send_sync_fup_eth(loops, seq_id_loop, "ETH")
 
 ############################################################################
 ##TestCase: Correct frame format of FUP
-canoe_inst.check_frame_format_of_fup(res)
+#canoe_inst.check_frame_format_of_fup(res)
 ############################################################################
 
 ############################################################################
