@@ -10,7 +10,7 @@ from datetime import datetime
 canoe_inst = CANoe()
 
 # open CANoe configuration. Replace canoe_cfg with yours.
-canoe_inst.open(canoe_cfg=r'C:\MBOS\Mastercheck_V182_intern\ConverterConfig.cfg')
+canoe_inst.open(canoe_cfg=r'C:\Users\pid5bc9\Desktop\CANoeConfig_Manual_PRE_Version\MBBL_vSwt_network-based.cfg')
 
 canoe_inst.enable_write_window_output_file(r"C:\.py_canoe\write_out.txt")
 canoe_inst.write_text_in_write_window("Test Author:Dimitar Angelov Email:dimitar.angelov@mercedes-benz.com")
