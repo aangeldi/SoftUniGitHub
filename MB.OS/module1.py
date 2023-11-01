@@ -49,8 +49,8 @@ def calculate_crc8x_fast(data):
 #for data_id in range(0xFF):
 #data = [55, 0, 0, 0, 0, 0, 0, 10, 29, 205, 101, 0, 204] #CRC_Time_0
 #data = [55, 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 53] #CRC_Time_0
-data = [55, 102, 11, 63] #CRC_Time_1
-#data = [0x37,0x69,0x06,0x0D] #CRC_Time_1
+#ata = [55, 102, 11, 63] #CRC_Time_1
+data = [0x37,0x00, 0x66,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x19,0x2B] #CRC_Time_1
 #data = [0, 13] #CRC_Status
 #data = [1, 32, 0, 0, 13] #CRC_Time_1 #CRC_Status
     #data.append(data_id)
